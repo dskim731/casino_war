@@ -49,42 +49,49 @@ class Game:
             for rank in Deck.ranks:
                 filename = f"{rank.lower()}_of_{suit.lower()}.png"
                 filepath = os.path.join(image_dir, filename)
-                self.card_images[f"{rank} of {suit}"] = ImageTk.PhotoImage(
-                    Image.open(filepath))
+                img = Image.open(filepath)
+                img = img.resize((200, 250))
+                self.card_images[f"{rank} of {suit}"] = ImageTk.PhotoImage(img)
 
     def create_widgets(self):
         self.title_label = tk.Label(
             self.root, text="Casino War", font=("Arial", 16))
         self.title_label.pack(pady=10)
 
-        self.deal_button = tk.Button(
-            self.root, text="Deal", font=("Arial", 12), command=self.deal)
-        self.deal_button.pack(pady=10)
+        # Frame for the game
+        self.game_frame = tk.Frame(self.root, bg="green")
+        self.game_frame.pack(pady=20)
 
-        self.player_label = tk.Label(
-            self.root, text="Player", font=("Arial", 12))
-        self.player_label.pack()
+        # Dealer frame
+        self.dealer_frame = tk.LabelFrame(
+            self.game_frame, text="Dealer", bd=0)
+        self.dealer_frame.grid(row=0, column=0, padx=20, ipadx=20)
 
-        self.player_card_label = tk.Label(self.root)
-        self.player_card_label.pack()
+        # Player frame
+        self.player_frame = tk.LabelFrame(
+            self.game_frame, text="Player", bd=0)
+        self.player_frame.grid(row=0, column=1, padx=20, ipadx=20)
 
-        self.dealer_label = tk.Label(
-            self.root, text="Dealer", font=("Arial", 12))
-        self.dealer_label.pack()
+        self.dealer_label = tk.Label(self.dealer_frame)
+        self.dealer_label.pack(pady=20)
 
-        self.dealer_card_label = tk.Label(self.root)
-        self.dealer_card_label.pack()
+        self.player_label = tk.Label(self.player_frame)
+        self.player_label.pack(pady=20)
 
         self.result_label = tk.Label(self.root, font=("Arial", 12))
         self.result_label.pack(pady=10)
+
+        self.deal_button = tk.Button(
+            self.root, text="Deal", font=("Arial", 12), command=self.deal)
+        self.deal_button.pack(pady=10)
 
     def deal(self):
         self.player_card = self.deck.deal_card()
         self.dealer_card = self.deck.deal_card()
 
-        self.player_card_label.config(
+        self.player_label.config(
             image=self.card_images[str(self.player_card)])
-        self.dealer_card_label.config(
+        self.dealer_label.config(
             image=self.card_images[str(self.dealer_card)])
 
         if self.get_card_value(self.player_card) > self.get_card_value(self.dealer_card):
@@ -101,6 +108,10 @@ class Game:
             return 13
         elif card.rank == "Queen":
             return 12
+        elif card.rank == "Jack":
+            return 11
+        else:
+            return int(card.rank)
 
 
 if __name__ == "__main__":
