@@ -62,16 +62,16 @@ class Game:
         self.game_frame = tk.Frame(self.root, bg="green")
         self.game_frame.pack(pady=20)
 
-        # Dealer frame
+        # Frames for the dealer and player
         self.dealer_frame = tk.LabelFrame(
-            self.game_frame, text="Dealer", bd=0)
+            self.game_frame, text="Dealer", font=("Arial", 14), fg="black", bd=0)
         self.dealer_frame.grid(row=0, column=0, padx=20, ipadx=20)
 
-        # Player frame
         self.player_frame = tk.LabelFrame(
-            self.game_frame, text="Player", bd=0)
+            self.game_frame, text="Player", font=("Arial", 14), fg="black", bd=0)
         self.player_frame.grid(row=0, column=1, padx=20, ipadx=20)
 
+        # Labels for dealer and player
         self.dealer_label = tk.Label(self.dealer_frame)
         self.dealer_label.pack(pady=20)
 
