@@ -55,7 +55,7 @@ class Game:
 
     def create_widgets(self):
         self.title_label = tk.Label(
-            self.root, text="Casino War", font=("Arial", 16))
+            self.root, text="Casino War", font=("Arial", 24))
         self.title_label.pack(pady=10)
 
         # Frame for the game
@@ -64,11 +64,11 @@ class Game:
 
         # Frames for the dealer and player
         self.dealer_frame = tk.LabelFrame(
-            self.game_frame, text="Dealer", font=("Arial", 14), fg="black", bd=0)
+            self.game_frame, text="Dealer", font=("Arial", 18), fg="black", bd=0)
         self.dealer_frame.grid(row=0, column=0, padx=20, ipadx=20)
 
         self.player_frame = tk.LabelFrame(
-            self.game_frame, text="Player", font=("Arial", 14), fg="black", bd=0)
+            self.game_frame, text="Player", font=("Arial", 18), fg="black", bd=0)
         self.player_frame.grid(row=0, column=1, padx=20, ipadx=20)
 
         # Labels for dealer and player
@@ -81,8 +81,14 @@ class Game:
         self.result_label = tk.Label(self.root, font=("Arial", 12))
         self.result_label.pack(pady=10)
 
+        # Win count frames
+        self.win_count = tk.Label(
+            self.root, text="Win counts", font=("Arial", 16), fg="black")
+        self.win_count.pack(pady=10)
+
+        # Deal button
         self.deal_button = tk.Button(
-            self.root, text="Deal", font=("Arial", 12), command=self.deal)
+            self.root, text="Deal", font=("Arial", 14), command=self.deal)
         self.deal_button.pack(pady=10)
 
     def deal(self):
