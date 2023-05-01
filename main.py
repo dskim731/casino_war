@@ -86,6 +86,16 @@ class Game:
             self.root, text="Win counts", font=("Arial", 16), fg="black")
         self.win_count.pack(pady=10)
 
+        # Dealer win count label
+        self.dealer_wins_label = tk.Label(
+            self.win_count, text="Dealer wins: 0", font=("Arial", 12), fg="black")
+        self.dealer_wins_label.pack(pady=20)
+
+        # Player win count label
+        self.player_wins_label = tk.Label(
+            self.win_count, text="Player wins: 0", font=("Arial", 12), fg="black")
+        self.player_wins_label.pack(pady=20)
+
         # Deal button
         self.deal_button = tk.Button(
             self.root, text="Deal", font=("Arial", 14), command=self.deal)
@@ -102,8 +112,14 @@ class Game:
 
         if self.get_card_value(self.player_card) > self.get_card_value(self.dealer_card):
             self.result_label.config(text="Player wins!")
+            self.player_wins_label += 1
+            self.player_wins_label.config(
+                text=f"Player wins: {self.player_wins}")
         elif self.get_card_value(self.player_card) < self.get_card_value(self.dealer_card):
             self.result_label.config(text="Dealer wins!")
+            self.dealer_wins_label += 1
+            self.dealer_wins_label.config(
+                text=f"Dealer wins: {self.dealer_wins}")
         else:
             self.result_label.config(text="Tie!")
 
