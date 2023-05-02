@@ -38,6 +38,9 @@ class Game:
         self.player_card = None
         self.dealer_card = None
 
+        self.player_wins = 0
+        self.dealer_wins = 0
+
         self.card_images = {}
         self.load_card_images()
 
@@ -54,6 +57,7 @@ class Game:
                 self.card_images[f"{rank} of {suit}"] = ImageTk.PhotoImage(img)
 
     def create_widgets(self):
+        # Title of game
         self.title_label = tk.Label(
             self.root, text="Casino War", font=("Arial", 24))
         self.title_label.pack(pady=10)
@@ -112,12 +116,12 @@ class Game:
 
         if self.get_card_value(self.player_card) > self.get_card_value(self.dealer_card):
             self.result_label.config(text="Player wins!")
-            self.player_wins_label += 1
+            self.player_wins += 1
             self.player_wins_label.config(
                 text=f"Player wins: {self.player_wins}")
         elif self.get_card_value(self.player_card) < self.get_card_value(self.dealer_card):
             self.result_label.config(text="Dealer wins!")
-            self.dealer_wins_label += 1
+            self.dealer_wins += 1
             self.dealer_wins_label.config(
                 text=f"Dealer wins: {self.dealer_wins}")
         else:
