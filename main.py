@@ -38,6 +38,8 @@ class Game:
         self.player_card = None
         self.dealer_card = None
 
+        self.cards_left = 52
+
         self.player_wins = 0
         self.dealer_wins = 0
 
@@ -68,7 +70,7 @@ class Game:
 
         # Cards left frame
         self.cards_left_frame = tk.LabelFrame(
-            self.root, text="Cards left", font=("Arial", 12), fg="black", bd=0)
+            self.root, font=("Arial", 12), fg="black", bd=0)
         self.cards_left_frame.pack(pady=10)
 
         # Cards left label
@@ -132,22 +134,30 @@ class Game:
         if self.get_card_value(self.player_card) > self.get_card_value(self.dealer_card):
             self.result_label.config(text="Player wins!")
             self.player_wins += 1
+            self.cards_left -= 2
             self.player_wins_label.config(
                 text=f"Player wins: {self.player_wins}")
+            self.cards_left_label.config(
+                text=f"Cards left: {self.cards_left}")
         elif self.get_card_value(self.player_card) < self.get_card_value(self.dealer_card):
             self.result_label.config(text="Dealer wins!")
             self.dealer_wins += 1
+            self.cards_left -= 2
             self.dealer_wins_label.config(
                 text=f"Dealer wins: {self.dealer_wins}")
+            self.cards_left_label.config(
+                text=f"Cards left: {self.cards_left}")
         else:
             self.result_label.config(text="Tie!")
 
     def reshuffle(self):
         self.deck = Deck()
+        self.cards_left = 52
         self.player_wins = 0
         self.dealer_wins = 0
         self.player_wins_label.config(text="Player wins: 0")
         self.dealer_wins_label.config(text="Dealer wins: 0")
+        self.cards_left_label.config(text="Cards left: 52")
         self.result_label.config(text="")
         self.player_label.config(image="")
         self.dealer_label.config(image="")
