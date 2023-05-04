@@ -99,7 +99,7 @@ class Game:
 
         # Win count frames
         self.win_count = tk.Label(
-            self.root, text="Win counts", font=("Arial", 16), fg="black")
+            self.root, text="Win counts", font=("Arial", 16), fg="purple")
         self.win_count.pack(pady=10)
 
         # Dealer win count label
